@@ -2,16 +2,16 @@
 	<div class="page">
 		<h1 class="page_title">{{ todo.title }}</h1>
 		<div class="page_content">
-			<ul class="todo_list">
-				<li class="todo_list_item" v-for="item in items"><input type="checkbox"><span>{{ item.text }}</span></li>
-				<li class="todo_list_item todo_add"><input type="text" v-model="text" placeholder="Add new todo" @keyup.enter="onAdd"></li>
+			<ul class="record_list">
+				<li class="record_list_item" v-for="(item, index) in items"><input type="checkbox" v-model="item.checked" @change="onChange(index, item)"><span>{{ item.text }}</span></li>
+				<li class="record_list_item record_add"><input type="text" v-model="text" placeholder="Add new todo" @keyup.enter="onAdd"></li>
 			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { getTodo, addRecord } from '../api/api'
+	import { getTodo, addRecord, updateRecord } from '../api/api'
 
 	export default {
 		data() {
@@ -29,6 +29,7 @@
 
 				getTodo({ id: ID }).then(res => {
 					let { id, title, record } = res.data.todo
+
 					this.items = record
 					this.todo = {
 						id: id,
@@ -40,8 +41,19 @@
 				const ID = this.$route.params.id
 				
 				addRecord({ id: ID, text: this.text }).then (res => {
-					this.text = ''
-					this.init()
+					this.$nextTick(() => {
+						this.text = '',
+						this.init()
+					})
+				})
+			},
+			onChange(index, item) {
+				const ID = this.$route.params.id
+
+				updateRecord({ id: ID, index: index, record: item }).then(res => {
+					this.$nextTick(() => {
+						this.init()
+					})
 				})
 			}
 		},

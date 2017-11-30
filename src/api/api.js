@@ -19,3 +19,7 @@ export const getTodo = params => {
 export const addRecord = params => {
 	return axios.post('/todo/addRecord', params).then(res => res.data)
 }
+
+export const updateRecord = params => {
+	return axios.put('/todo/updateRecord', params).then(res => res.data)
+}

@@ -20,3 +20,24 @@
 		}
 	}
 </script>
+
+<style>
+	
+	.todo_menu {
+		width: 200px;
+		float: left;
+	}
+
+	.todo_list_item {
+		display: block;
+		color: #333;
+	}
+
+	.todo_list_item.active {
+		color: #0866c6;
+	}
+
+	.todo_content {
+		margin-left: 220px;
+	}
+</style>

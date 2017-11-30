@@ -55,17 +55,28 @@ export default {
 		})
 
 		mock.onPost('/todo/addRecord').reply(config => {
-			let { id, text} = JSON.parse(config.data)
+			let { id, text } = JSON.parse(config.data)
 
-			Todos.some((t, index) => {
-				if (t.id === id) {
-					t.record.push({
-						text: text,
-						checked: false
-					})
-					return true
-				}
+			Todos.find((t, i) => {
+				return t.id === id
+			}).record.push({
+				text: text,
+				checked: false
 			})
+
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve([200])
+				}, 200)
+			})
+		})
+
+		mock.onPut('/todo/updateRecord').reply(config => {
+			let { id, index, record } = JSON.parse(config.data)
+
+			Todos.find((t, i) => {
+				return t.id === id
+			}).record[index] = record
 
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
