@@ -2,10 +2,10 @@
 	<div class="record_list_item">
 		<input type="checkbox" v-model="item.checked" @change="onChange">
 		<span v-show="!edit">{{ item.text }}</span>
-		<input type="text" v-show="edit" v-model="item.text" v-focus @blur="onChange" @keyup.enter="onChange">
-		<div class="toolbar">
-			<a href="javascript: void(0);" @click="onEdit">编辑</a>
-			<a href="javascript: void(0);" @click="onDelete">删除</a>
+		<input type="text" class="todo_input" v-show="edit" v-model="item.text" v-focus @blur="onChange" @keyup.enter="onChange">
+		<div class="todo_toolbar">
+			<a href="javascript: void(0);" @click="onEdit" title="编辑" class="icon-edit"></a>
+			<a href="javascript: void(0);" @click="onDelete" title="删除" class="icon-trashbin"></a>
 		</div>
 	</div>
 </template>
@@ -49,3 +49,14 @@
 		}
 	}
 </script>
+
+<style>
+	.record_list_item {
+		line-height: 40px;
+	}
+
+	.record_list_item input[type="checkbox"]:checked + span {
+		text-decoration: line-through;
+		color: #999;
+	}
+</style>

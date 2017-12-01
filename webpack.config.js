@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 let resolve = dir => {
@@ -15,18 +16,26 @@ module.exports = {
 		rules: [
 			{
 				test: /\.vue$/,
-				loader: 'vue-loader'
+				loader: 'vue-loader',
+				options: {
+					loaders: {
+						css: ExtractTextPlugin.extract({
+							use: 'css-loader',
+							fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+						})
+					}
+				}
 			},
-			// {
-			// 	test: /\.scss/,
-			// 	use: [{
-			// 		loader: 'style-loader'  // 将 JS 字符串生成为 style 节点
-			// 	}, {
-			// 		loader: 'css-loader'  // 将 CSS 转化成 CommonJS 模块
-			// 	}, {
-			// 		loader: 'sass-loader'  // 将 Sass 编译成 CSS
-			// 	}]
-			// }
+			{
+				test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+				use: [{
+					loader: "url-loader",
+					options: {
+						limit: 10000,
+						name: 'fonts/[name].[hash:7].[ext]'    // 将字体放入fonts文件夹下
+					}
+				}]
+			}
 		]
 	},
 	resolve: {
@@ -35,5 +44,8 @@ module.exports = {
 			'@': resolve('src')
 		},
 		extensions: ['*', '.js', '.vue', '.json']
-	}
+	},
+	plugins: [
+		new ExtractTextPlugin('style.css')
+	]
 };

@@ -22,22 +22,16 @@
 </script>
 
 <style>
-	
 	.todo_menu {
-		width: 200px;
 		float: left;
-	}
-
-	.todo_list_item {
-		display: block;
-		color: #333;
-	}
-
-	.todo_list_item.active {
-		color: #0866c6;
+		width: 20%;
+		padding: 10px 20px 20px;
+		border: 1px solid #dcdcdc;
 	}
 
 	.todo_content {
-		margin-left: 220px;
+		margin-left: 20%;
+		padding: 0 20px;
 	}
+
 </style>

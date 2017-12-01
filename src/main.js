@@ -16,6 +16,10 @@ new Vue({
 
 Vue.directive('focus', {
 	update: el => {
+		console.log(el)
+		el.focus()
+	},
+	inserted: el => {
 		el.focus()
 	}
 })

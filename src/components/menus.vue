@@ -55,3 +55,31 @@
 		}
 	};
 </script>
+
+<style>
+	.todo_list_item {
+		display: block;
+		line-height: 40px;
+		color: #333;
+	}
+
+	.todo_list_item:before {
+		margin-right: 10px;
+		content: '\f03a';
+		font-family: 'icomoon';
+	}
+
+	.todo_list_item.active {
+		color: #0866c6;
+	}
+
+	.todo_list_add { 
+		background: #0866c6;
+		text-align: center;
+		color: #fff;
+	}
+
+	.todo_list_add:before {
+		content: '\f067';
+	}
+</style>

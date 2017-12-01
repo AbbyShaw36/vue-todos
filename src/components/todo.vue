@@ -1,21 +1,21 @@
 <template>
-	<div class="page" v-if="!isDeleted">
-		<div class="page_head">
-			<h1 class="page_title">
+	<div class="todo" v-if="!isDeleted">
+		<div class="todo_head">
+			<h1 class="todo_title">
 				<span v-show="!edit">{{ todo.title }}</span>
-				<input type="text" v-model="todo.title" v-focus v-show="edit" @blur="onChange" @keyup.enter="onChange">
+				<input class="todo_input" type="text" v-model="todo.title" v-focus v-show="edit" @blur="onChange" @keyup.enter="onChange">
 			</h1>
-			<div class="toolbar">
-				<a href="javascript: void(0);" @click="edit = true">编辑</a>
-				<a href="javascript: void(0);" @click="onDelete">删除</a>
+			<div class="todo_toolbar">
+				<a href="javascript: void(0);" @click="edit = true" title="编辑" class="icon-edit"></a>
+				<a href="javascript: void(0);" @click="onDelete" title="删除" class="icon-trashbin"></a>
 			</div>
 		</div>
-		<div class="page_content">
+		<div class="todo_detail">
 			<div class="record_list">
 				<div v-for="(item, index) in items">
 					<record :item="item" :index="index" :id="todo.id" :init="init"></record>
 				</div>
-				<div class="record_list_item record_add"><input type="text" v-model="text" placeholder="Add new todo" @keyup.enter="onCreate"></div>
+				<div class="record_list_item record_add"><input type="text" class="todo_input_add" v-model="text" placeholder="Add new todo" @keyup.enter="onCreate"></div>
 			</div>
 		</div>
 	</div>
@@ -87,3 +87,44 @@
 		}
 	}
 </script>
+
+<style>
+	.todo_head {
+		position: relative;
+		overflow: hidden;
+		margin: 20px 0;
+		line-height: 40px;
+		font-size: 28px;
+	}
+
+	.todo_title {
+		float: left;
+	}
+
+	.todo_toolbar {
+		float: right;
+		margin-left: 20px;
+	}
+
+	.todo_toolbar a {
+		color: #0866c6;
+	}
+
+	.todo_input {
+		width: 80%;
+		border: none;
+	}
+
+	.todo_head .todo_input {
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.todo_input_add {
+		width: 50%;
+		height: 30px;
+		line-height: 28px;
+		font-size: 16px;
+		padding: 0 10px;
+	}
+</style>
