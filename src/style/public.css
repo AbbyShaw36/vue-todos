@@ -2,4 +2,12 @@
 html { width: 100%; height: 100%; overflow-y: auto; background: #fff; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; }
 a { text-decoration: none; color: #333; }
 input:not[type=raido], input:not[type=checkbox], button, textarea { border: none; outline: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+
 .container { width: 1170px; margin: 0 auto; }
+.red { color: #dc3545 !important; }
+
+.checkbox { position: relative; display: inline-block; cursor: pointer; vertical-align: middle; }
+.checkbox input[type=checkbox] { position: absolute; left: 0; opacity: 0; }
+.checkbox span { display: block; vertical-align: middle; font-size: 14px; }
+.checkbox span:before { display: inline-block; margin-right: 10px; vertical-align: middle; content: "\e900"; font-family: "icomoon"; font-size: inherit; font-weight: inherit; }
+.checkbox input[type=checkbox]:checked + span:before { content: "\e901"; color: #0866c6; }

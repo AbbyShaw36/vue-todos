@@ -24883,8 +24883,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("label", [
+  return _c("div", { staticClass: "record_list_item" }, [
+    _c("label", { staticClass: "checkbox" }, [
       _c("input", {
         directives: [
           {
@@ -24925,34 +24925,33 @@ var render = function() {
           ]
         }
       }),
-      _c("span", [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.item.text,
-              expression: "item.text"
-            }
-          ],
-          staticClass: "todo_input",
-          attrs: { type: "text" },
-          domProps: { value: _vm.item.text },
-          on: {
-            blur: _vm.onChange,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.item, "text", $event.target.value)
-            }
-          }
-        })
-      ])
+      _c("span")
     ]),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.item.text,
+          expression: "item.text"
+        }
+      ],
+      staticClass: "todo_input",
+      attrs: { type: "text" },
+      domProps: { value: _vm.item.text },
+      on: {
+        blur: _vm.onChange,
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.item, "text", $event.target.value)
+        }
+      }
+    }),
     _c("div", { staticClass: "todo_toolbar" }, [
       _c("a", {
-        staticClass: "icon-trashbin",
+        staticClass: "icon-close red",
         attrs: { title: "删除" },
         on: { click: _vm.onDelete }
       })
@@ -25022,7 +25021,6 @@ var render = function() {
               _vm._l(_vm.items, function(item, index) {
                 return _c(
                   "li",
-                  { staticClass: "record_list_item" },
                   [
                     _c("record", {
                       attrs: {
@@ -25036,7 +25034,7 @@ var render = function() {
                   1
                 )
               }),
-              _c("li", { staticClass: "record_list_item record_add" }, [
+              _c("li", { staticClass: "record_add" }, [
                 _c("input", {
                   directives: [
                     {

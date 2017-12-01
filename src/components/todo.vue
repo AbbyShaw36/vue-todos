@@ -7,9 +7,9 @@
 				a.icon-trashbin(@click="onDelete", title="删除")
 		.todo_detail
 			ul.record_list
-				li.record_list_item(v-for="(item, index) in items")
+				li(v-for="(item, index) in items")
 					record(":item"="item", ":index"="index", ":id"="todo.id", ":init"="init")
-				li.record_list_item.record_add
+				li.record_add
 					input.todo_input_add(type="text", v-model="text", placeholder="Add new todo", @keyup.enter="onCreate")
 </template>
 
@@ -103,6 +103,7 @@
 	.todo_input {
 		width: 80%;
 		border: none;
+		vertical-align: middle;
 	}
 
 	.todo_head .todo_input {
