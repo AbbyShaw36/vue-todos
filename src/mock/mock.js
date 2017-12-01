@@ -54,6 +54,36 @@ export default {
 			})
 		})
 
+		mock.onPut('/todo/updateTodo').reply(config => {
+			let { id, title } = JSON.parse(config.data)
+
+			Todos.find((t, i) => {
+				return t.id === id
+			}).title = title
+
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve([200])
+				}, 200)
+			})
+		})
+
+		mock.onDelete('/todo/deleteTodo').reply(config => {
+			let { id } = config.params
+
+			let index = Todos.findIndex((t, i) => {
+				return t.id === id
+			})
+
+			Todos.splice(index, 1)
+
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve([200])
+				}, 200)
+			})
+		})
+
 		mock.onPost('/todo/addRecord').reply(config => {
 			let { id, text } = JSON.parse(config.data)
 
@@ -72,11 +102,25 @@ export default {
 		})
 
 		mock.onPut('/todo/updateRecord').reply(config => {
-			let { id, index, record } = JSON.parse(config.data)
+			let { id, index, item } = JSON.parse(config.data)
 
 			Todos.find((t, i) => {
 				return t.id === id
-			}).record[index] = record
+			}).record[index] = item
+
+			return new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve([200])
+				}, 200)
+			})
+		})
+
+		mock.onDelete('/todo/deleteRecord').reply(config => {
+			let { id, index } = config.params
+
+			Todos.find((t, i) => {
+				return t.id === id
+			}).record.splice(index, 1)
 
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {

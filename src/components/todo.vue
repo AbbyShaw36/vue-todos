@@ -1,23 +1,37 @@
 <template>
-	<div class="page">
-		<h1 class="page_title">{{ todo.title }}</h1>
+	<div class="page" v-if="!isDeleted">
+		<div class="page_head">
+			<h1 class="page_title">
+				<span v-show="!edit">{{ todo.title }}</span>
+				<input type="text" v-model="todo.title" v-focus v-show="edit" @blur="onChange" @keyup.enter="onChange">
+			</h1>
+			<div class="toolbar">
+				<a href="javascript: void(0);" @click="edit = true">编辑</a>
+				<a href="javascript: void(0);" @click="onDelete">删除</a>
+			</div>
+		</div>
 		<div class="page_content">
-			<ul class="record_list">
-				<li class="record_list_item" v-for="(item, index) in items"><input type="checkbox" v-model="item.checked" @change="onChange(index, item)"><span>{{ item.text }}</span></li>
-				<li class="record_list_item record_add"><input type="text" v-model="text" placeholder="Add new todo" @keyup.enter="onAdd"></li>
-			</ul>
+			<div class="record_list">
+				<div v-for="(item, index) in items">
+					<record :item="item" :index="index" :id="todo.id" :init="init"></record>
+				</div>
+				<div class="record_list_item record_add"><input type="text" v-model="text" placeholder="Add new todo" @keyup.enter="onCreate"></div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { getTodo, addRecord, updateRecord } from '../api/api'
+	import { getTodo, addRecord, updateTodo, deleteTodo } from '../api/api'
+	import record from './record.vue'
 
 	export default {
 		data() {
 			return {
 				todo: {},
-				items: []
+				items: [],
+				edit: false,
+				isDeleted: false
 			}
 		},
 		created() {
@@ -37,30 +51,39 @@
 					}
 				})
 			},
-			onAdd() {
-				const ID = this.$route.params.id
-				
-				addRecord({ id: ID, text: this.text }).then (res => {
+			onChange() {
+				updateTodo({ id: this.todo.id, title: this.todo.title }).then(res => {
+					this.$store.dispatch('getTodo')
+					this.edit = false
+				})
+			},
+			onCreate() {
+				addRecord({ id: this.todo.id, text: this.text }).then (res => {
 					this.$nextTick(() => {
 						this.text = '',
 						this.init()
 					})
 				})
 			},
-			onChange(index, item) {
-				const ID = this.$route.params.id
+			onDelete() {
+				if (confirm("是否删除该代办列表？")) {
 
-				updateRecord({ id: ID, index: index, record: item }).then(res => {
-					this.$nextTick(() => {
-						this.init()
+					deleteTodo({ id: this.todo.id }).then(res => {
+						this.$store.dispatch('getTodo')
+						this.isDeleted = true
+						this.$nextTick()
 					})
-				})
+				}
 			}
 		},
 		watch: {
 			'$route.params.id'() {
+				this.isDeleted = false
 				this.init()
 			}
+		},
+		components: {
+			record
 		}
 	}
 </script>

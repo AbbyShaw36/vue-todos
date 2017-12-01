@@ -1,7 +1,7 @@
 <template>
 	<div class="todo_list">
 		<a href="javascript: void(0);" class="todo_list_item" v-for="item in todoList" @click="goList(item.id)" :class="{'active': item.id === todoId}">{{ item.title }}</a>
-		<a href="javascript: vodi(0);" class="todo_list_item todo_list_add" @click="addTodo()">CREATE</a>
+		<a href="javascript: vodi(0);" class="todo_list_item todo_list_add" @click="addTodo()">新增</a>
 	</div>
 </template>
 

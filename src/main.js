@@ -11,5 +11,11 @@ new Vue({
 	router,
 	store,
 	template: '<App/>',
-	components: { App }
+	components: { App },
+})
+
+Vue.directive('focus', {
+	update: el => {
+		el.focus()
+	}
 })
