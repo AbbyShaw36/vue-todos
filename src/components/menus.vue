@@ -1,8 +1,7 @@
-<template>
-	<div class="todo_list">
-		<a href="javascript: void(0);" class="todo_list_item" v-for="item in todoList" @click="goList(item.id)" :class="{'active': item.id === todoId}">{{ item.title }}</a>
-		<a href="javascript: vodi(0);" class="todo_list_item todo_list_add" @click="addTodo()">新增</a>
-	</div>
+<template lang="pug">
+	div
+		a.menu_item(v-for="item in todoList", @click="goList(item.id)" ":class"="{'active': item.id === todoId}") {{item.title}}
+		a.menu_item.menu_item_create(@click="addTodo()") 新增
 </template>
 
 <script>
@@ -57,29 +56,29 @@
 </script>
 
 <style>
-	.todo_list_item {
+	.menu_item {
 		display: block;
 		line-height: 40px;
 		color: #333;
 	}
 
-	.todo_list_item:before {
+	.menu_item:before {
 		margin-right: 10px;
 		content: '\f03a';
 		font-family: 'icomoon';
 	}
 
-	.todo_list_item.active {
+	.menu_item.active {
 		color: #0866c6;
 	}
 
-	.todo_list_add { 
+	.menu_item_create { 
 		background: #0866c6;
 		text-align: center;
 		color: #fff;
 	}
 
-	.todo_list_add:before {
+	.menu_item_create:before {
 		content: '\f067';
 	}
 </style>

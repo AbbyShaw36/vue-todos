@@ -14,12 +14,12 @@ new Vue({
 	components: { App },
 })
 
-Vue.directive('focus', {
-	update: el => {
-		console.log(el)
-		el.focus()
-	},
-	inserted: el => {
-		el.focus()
-	}
-})
+// Vue.directive('focus', {
+// 	update: el => {
+// 		console.log(el)
+// 		el.focus()
+// 	},
+// 	inserted: el => {
+// 		el.focus()
+// 	}
+// })

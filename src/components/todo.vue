@@ -1,24 +1,16 @@
-<template>
-	<div class="todo" v-if="!isDeleted">
-		<div class="todo_head">
-			<h1 class="todo_title">
-				<span v-show="!edit">{{ todo.title }}</span>
-				<input class="todo_input" type="text" v-model="todo.title" v-focus v-show="edit" @blur="onChange" @keyup.enter="onChange">
-			</h1>
-			<div class="todo_toolbar">
-				<a href="javascript: void(0);" @click="edit = true" title="编辑" class="icon-edit"></a>
-				<a href="javascript: void(0);" @click="onDelete" title="删除" class="icon-trashbin"></a>
-			</div>
-		</div>
-		<div class="todo_detail">
-			<div class="record_list">
-				<div v-for="(item, index) in items">
-					<record :item="item" :index="index" :id="todo.id" :init="init"></record>
-				</div>
-				<div class="record_list_item record_add"><input type="text" class="todo_input_add" v-model="text" placeholder="Add new todo" @keyup.enter="onCreate"></div>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	.todo(v-if="!isDeleted")
+		.todo_head
+			h2.todo_title
+				input.todo_input(type="text", v-model="todo.title", @blur="onChange")
+			.todo_toolbar
+				a.icon-trashbin(@click="onDelete", title="删除")
+		.todo_detail
+			ul.record_list
+				li.record_list_item(v-for="(item, index) in items")
+					record(":item"="item", ":index"="index", ":id"="todo.id", ":init"="init")
+				li.record_list_item.record_add
+					input.todo_input_add(type="text", v-model="text", placeholder="Add new todo", @keyup.enter="onCreate")
 </template>
 
 <script>
@@ -30,7 +22,6 @@
 			return {
 				todo: {},
 				items: [],
-				edit: false,
 				isDeleted: false
 			}
 		},
@@ -54,7 +45,6 @@
 			onChange() {
 				updateTodo({ id: this.todo.id, title: this.todo.title }).then(res => {
 					this.$store.dispatch('getTodo')
-					this.edit = false
 				})
 			},
 			onCreate() {
@@ -126,5 +116,10 @@
 		line-height: 28px;
 		font-size: 16px;
 		padding: 0 10px;
+	}
+
+	.record_list {
+		margin: 0;
+		padding: 0;
 	}
 </style>

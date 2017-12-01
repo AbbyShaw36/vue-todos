@@ -1,12 +1,7 @@
-<template>
-	<section class="container">
-		<section class="todo_menu">
-			<menus></menus>
-		</section>
-		<section class="todo_content">
-			<todo></todo>
-		</section>
-	</section>
+<template lang="pug">
+	div
+		menus.todo_menu
+		todo.todo_content
 </template>
 
 <script>

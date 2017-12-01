@@ -74,25 +74,25 @@ input:not[type=raido], input:not[type=checkbox], button, textarea { border: none
 }
 
 
-.todo_list_item {
+.menu_item {
 	display: block;
 	line-height: 40px;
 	color: #333;
 }
-.todo_list_item:before {
+.menu_item:before {
 	margin-right: 10px;
 	content: '\F03A';
 	font-family: 'icomoon';
 }
-.todo_list_item.active {
+.menu_item.active {
 	color: #0866c6;
 }
-.todo_list_add { 
+.menu_item_create { 
 	background: #0866c6;
 	text-align: center;
 	color: #fff;
 }
-.todo_list_add:before {
+.menu_item_create:before {
 	content: '\F067';
 }
 
@@ -128,11 +128,15 @@ input:not[type=raido], input:not[type=checkbox], button, textarea { border: none
 	font-size: 16px;
 	padding: 0 10px;
 }
+.record_list {
+	margin: 0;
+	padding: 0;
+}
 
 .record_list_item {
 	line-height: 40px;
 }
-.record_list_item input[type="checkbox"]:checked + span {
+.record_list_item input[type="checkbox"]:checked + span input {
 	text-decoration: line-through;
 	color: #999;
 }

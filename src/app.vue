@@ -1,14 +1,10 @@
-<template>
-	<div id="app">
-		<header class="header">
-			<div class="container">
-				<h1>TODO LIST</h1>
-			</div>
-		</header>
-		<div class="main">
-			<router-view></router-view>
-		</div>
-	</div>
+<template lang="pug">
+	#app
+		header.header
+			.container
+				h1 TODO LIST
+		.main
+			router-view.container
 </template>
 
 <script>
